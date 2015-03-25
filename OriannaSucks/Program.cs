@@ -100,7 +100,7 @@ namespace OriannaSucks
 		{
 			Q.SetSkillshot(0.25f, 80, 1300, false, SkillshotType.SkillshotLine,userBall.getPosition());
 			W.SetSkillshot(0f, 250, float.MaxValue, false, SkillshotType.SkillshotCircle, userBall.getPosition(),userBall.getPosition());
-			E.SetSkillshot(0.25f, 145, 1700, false, SkillshotType.SkillshotLine, userBall.getPosition());
+			E.SetSkillshot(0.25f, 145, 1700, false, SkillshotType.SkillshotLine);
 			R.SetSkillshot(0.60f, 370, float.MaxValue, false, SkillshotType.SkillshotCircle, userBall.getPosition(),userBall.getPosition());
 		}
 		static void UpdateSkillshots()
@@ -139,7 +139,7 @@ namespace OriannaSucks
 				float AngleA = ShieldTarget.Position.To2D().AngleBetween(userBall.getPosition().To2D());
 				float AngleB = DamageTarget.Position.To2D().AngleBetween(userBall.getPosition().To2D());
 				float HealthPercentage =  ShieldTarget.Health / ShieldTarget.MaxHealth;
-				if (AngleA == AngleB || HealthPercentage <= 0.25f)
+				if ((AngleA == AngleB && (userBall.getPosition().Distance(ShieldTarget.Position) > userBall.getPosition().Distance(DamageTarget.Position))) || HealthPercentage <= 0.25f)
 				{
 					E.CastOnUnit(ShieldTarget);
 					userBall.setPosition(ShieldTarget.Position);
