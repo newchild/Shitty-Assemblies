@@ -33,16 +33,16 @@ namespace OriannaSucks
 			Player = ObjectManager.Player;
 			if (Player.BaseSkinName != Championname)
 				return;
+			Notifications.AddNotification(new Notification("newchild's Orianna loaded"));
 			lastTick = Environment.TickCount;
-			Drawing.OnDraw += Drawing_OnDraw;
 			userBall = new Ball(Player.Position);
-			Game.OnUpdate += onUpdate;
 			Q = new Spell(SpellSlot.Q, 825, TargetSelector.DamageType.Magical);
 			W = new Spell(SpellSlot.W, 250, TargetSelector.DamageType.Magical);
 			E = new Spell(SpellSlot.E, 1100, TargetSelector.DamageType.Magical);
 			R = new Spell(SpellSlot.R, 370, TargetSelector.DamageType.Magical);
 			LoadSkillshots();
-
+			Game.OnUpdate += onUpdate;
+			Drawing.OnDraw += Drawing_OnDraw;
 		}
 
 		static void Drawing_OnDraw(EventArgs args)
