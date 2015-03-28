@@ -25,6 +25,7 @@ namespace OriannaSucks
 		private static Spell Q, W, E, R;
 		static void Main(string[] args)
 		{
+			onLoad(new EventArgs);
 			Game.OnStart += onLoad;
 
 		}
@@ -51,6 +52,7 @@ namespace OriannaSucks
 			{
 				Drawing.DrawCircle(Player.Position, Q.Range, Color.Green);
 				Drawing.DrawCircle(Player.Position, E.Range, Color.Yellow);
+				
 			}
 			
 		}
