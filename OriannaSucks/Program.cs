@@ -70,7 +70,7 @@ namespace OriannaSucks
 				UpdateSkillshots();
 				hasBall = true;
 			}
-			if (hasBall &&  Environment.TickCount-lastTick >= 250 )
+			if (hasBall &&  Environment.TickCount-lastTick >= 50 )
 			{
 				userBall.setPosition(Player.Position);
 				lastTick = Environment.TickCount;
@@ -108,6 +108,7 @@ namespace OriannaSucks
 		}
 		static void UpdateSkillshots()
 		{
+			Game.PrintChat("Update Position");
 			Q.UpdateSourcePosition(userBall.getPosition());
 			W.UpdateSourcePosition(userBall.getPosition(), userBall.getPosition());
 			E.UpdateSourcePosition(userBall.getPosition());
@@ -120,6 +121,7 @@ namespace OriannaSucks
 				var output = Q.GetPrediction(target, true);
 				if (output.Hitchance == HitChance.VeryHigh)
 				{
+					Game.PrintChat("cast Q");
 					Q.Cast(output.CastPosition);
 					userBall.setPosition(output.CastPosition);
 					UpdateSkillshots();
@@ -132,6 +134,7 @@ namespace OriannaSucks
 		{
 			if (W.CanCast(target))
 			{
+				Game.PrintChat("cast W");
 				W.CastIfHitchanceEquals(target, HitChance.VeryHigh);
 			}
 		}
@@ -144,6 +147,7 @@ namespace OriannaSucks
 				float HealthPercentage =  ShieldTarget.Health / ShieldTarget.MaxHealth;
 				if ((AngleA == AngleB && (userBall.getPosition().Distance(ShieldTarget.Position) > userBall.getPosition().Distance(DamageTarget.Position))) || HealthPercentage <= 0.25f)
 				{
+					Game.PrintChat("cast E");
 					E.CastOnUnit(ShieldTarget);
 					userBall.setPosition(ShieldTarget.Position);
 					UpdateSkillshots();
@@ -166,6 +170,7 @@ namespace OriannaSucks
 				var output = R.GetPrediction(target);
 				if (output.AoeTargetsHitCount >= 2 && output.Hitchance == HitChance.VeryHigh)
 				{
+					Game.PrintChat("cast R");
 					R.Cast();
 				}
 
