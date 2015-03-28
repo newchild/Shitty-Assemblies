@@ -42,7 +42,13 @@ namespace OriannaSucks
 			E = new Spell(SpellSlot.E, 1100, TargetSelector.DamageType.Magical);
 			R = new Spell(SpellSlot.R, 370, TargetSelector.DamageType.Magical);
 			LoadSkillshots();
-			constructMenu();
+			MainMenu = new Menu(Championname, Championname, true);
+			TargetSelector.AddToMenu(MainMenu.SubMenu("Target Selector"));
+			myOrb = new Orbwalking.Orbwalker(MainMenu.SubMenu("Orbwalking"));
+			MainMenu.AddSubMenu(new Menu("Combo", "Combo"));
+			MainMenu.SubMenu("Combo").AddItem(new MenuItem("ComboActive", "Combo!").SetValue(new KeyBind(MainMenu.Item("Orbwalk").GetValue<KeyBind>().Key, KeyBindType.Press)));
+			MainMenu.AddSubMenu(new Menu("Drawings", "Drawings"));
+			MainMenu.SubMenu("Drawings").AddItem(new MenuItem("DoDrawings", "Draw Stuff :^)").SetValue(true));
 			Game.OnUpdate += onUpdate;
 			Drawing.OnDraw += Drawing_OnDraw;
 		}
@@ -90,13 +96,7 @@ namespace OriannaSucks
 		}
 		static void constructMenu()
 		{
-			MainMenu = new Menu(Championname, Championname, true);
-			TargetSelector.AddToMenu(MainMenu.SubMenu("Target Selector"));
-			myOrb = new Orbwalking.Orbwalker(MainMenu.SubMenu("Orbwalking"));
-			MainMenu.AddSubMenu(new Menu("Combo", "Combo"));
-			MainMenu.SubMenu("Combo").AddItem(new MenuItem("ComboActive", "Combo!").SetValue(new KeyBind(MainMenu.Item("Orbwalk").GetValue<KeyBind>().Key, KeyBindType.Press)));
-			MainMenu.AddSubMenu(new Menu("Drawings", "Drawings"));
-			MainMenu.SubMenu("Drawings").AddItem(new MenuItem("DoDrawings", "Draw Stuff :^)").SetValue(true));
+			
 
 		}
 		static void LoadSkillshots()
