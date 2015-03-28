@@ -77,14 +77,14 @@ namespace OriannaSucks
 			}
 			if (MainMenu.Item("ComboActive").GetValue<KeyBind>().Active)
 			{
-				var QTarget = Q.GetTarget();
-				CastQ(QTarget);
-				var WTarget = W.GetTarget();
-				CastW(WTarget);
-				var ETarget = E.GetTarget();
-				CastE(Player, E.GetTarget());
-				var RTarget = R.GetTarget();
-				CastR(RTarget);
+				var qTarget = TargetSelector.GetTarget(Q.Range, TargetSelector.DamageType.Magical);
+				var wTarget = TargetSelector.GetTarget(W.Range, TargetSelector.DamageType.Magical, true, null, userBall.getPosition());
+				var eTarget = TargetSelector.GetTarget(E.Range, TargetSelector.DamageType.Magical);
+				var rTarget = TargetSelector.GetTarget(R.Range, TargetSelector.DamageType.Magical, true, null, userBall.getPosition());
+				CastQ(qTarget);
+				CastW(wTarget);
+				CastR(rTarget);
+				CastE(Player,eTarget);
 			}
 
 		}
@@ -120,7 +120,7 @@ namespace OriannaSucks
 			if (Q.CanCast(target))
 			{
 				var output = Q.GetPrediction(target, true);
-				if (output.Hitchance == HitChance.VeryHigh)
+				if (output.Hitchance == HitChance.Medium)
 				{
 					Game.PrintChat("cast Q");
 					Q.Cast(output.CastPosition);
@@ -136,7 +136,7 @@ namespace OriannaSucks
 			if (W.CanCast(target))
 			{
 				Game.PrintChat("cast W");
-				W.CastIfHitchanceEquals(target, HitChance.VeryHigh);
+				W.CastIfHitchanceEquals(target, HitChance.Medium);
 			}
 		}
 		static void CastE(Obj_AI_Base ShieldTarget, Obj_AI_Base DamageTarget)
@@ -169,7 +169,7 @@ namespace OriannaSucks
 			if (R.IsReady())
 			{
 				var output = R.GetPrediction(target);
-				if (output.AoeTargetsHitCount >= 2 && output.Hitchance == HitChance.VeryHigh)
+				if (output.AoeTargetsHitCount >= 2 && output.Hitchance == HitChance.High)
 				{
 					Game.PrintChat("cast R");
 					R.Cast();
