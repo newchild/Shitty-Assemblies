@@ -25,7 +25,7 @@ namespace OriannaSucks
 		private static Spell Q, W, E, R;
 		static void Main(string[] args)
 		{
-			onLoad(new EventArgs);
+			onLoad(new EventArgs());
 			Game.OnStart += onLoad;
 
 		}
