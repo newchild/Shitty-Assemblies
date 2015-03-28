@@ -42,6 +42,7 @@ namespace OriannaSucks
 			E = new Spell(SpellSlot.E, 1100, TargetSelector.DamageType.Magical);
 			R = new Spell(SpellSlot.R, 370, TargetSelector.DamageType.Magical);
 			LoadSkillshots();
+			constructMenu();
 			Game.OnUpdate += onUpdate;
 			Drawing.OnDraw += Drawing_OnDraw;
 		}
