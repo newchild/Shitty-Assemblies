@@ -45,15 +45,6 @@ namespace OriannaSucks
 			constructMenu();
 			Game.OnUpdate += onUpdate;
 			Drawing.OnDraw += Drawing_OnDraw;
-			Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
-		}
-
-		static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
-		{
-			if (sender.IsMe && !args.SData.IsAutoAttack())
-			{
-				Game.PrintChat(args.SData.Name);
-			}
 		}
 
 		static void Drawing_OnDraw(EventArgs args)
